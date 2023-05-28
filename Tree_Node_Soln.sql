@@ -67,11 +67,11 @@ p_id INT
 
 INSERT INTO Tree ( id, p_id )
 VALUES
-(1, NULL),
-(2, 1),
-(3, 1),
-(4, 2),
-(5, 2) ;
+    (1, NULL),
+    (2, 1),
+    (3, 1),
+    (4, 2),
+    (5, 2) ;
 
 /* Delete values */
 DELETE Tree
@@ -84,9 +84,9 @@ SELECT * FROM Tree ;
 /* Code */
 SELECT id,
 	CASE
-		WHEN  p_id IS NULL THEN NULL
-		WHEN id IN (SELECT p_id FROM Tree) THEN 'Inner'
-		ELSE 'Leaf'
-		END AS type
+	    WHEN  p_id IS NULL THEN NULL
+	    WHEN id IN (SELECT p_id FROM Tree) THEN 'Inner'
+	    ELSE 'Leaf'
+	END AS type
 FROM Tree ;
 
