@@ -99,13 +99,15 @@ FROM
 WITH CTE AS (
   SELECT 
     DISTINCT(SALARY), 
-    DENSE_RANK() OVER(
-      ORDER BY 
+    DENSE_RANK() 
+    OVER(
+        ORDER BY 
         SALARY DESC
     ) sal_rnk 
   FROM 
     Employee
 ) 
+
 SELECT 
   CASE 
     WHEN sal_rnk <> 2 THEN NULL 
