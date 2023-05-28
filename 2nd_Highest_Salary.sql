@@ -74,8 +74,9 @@ WITH CTE AS (
     ) AS cnt 
   FROM 
     Employee
-) -- Then use a CASE statement
+) 
 
+-- Then use a CASE statement
 SELECT 
   CASE -- if cnt is just 1 record it means there is no second highest salary.
     WHEN cnt = 1 THEN NULL -- This is created if requirement is to return a record has NULL
@@ -103,7 +104,7 @@ WITH CTE AS (
     OVER(
         ORDER BY 
         SALARY DESC
-    ) sal_rnk 
+    ) AS sal_rnk 
   FROM 
     Employee
 ) 
@@ -130,7 +131,7 @@ WITH CTE AS (
     DENSE_RANK() OVER(
   ORDER BY 
         SALARY DESC
-    ) sal_rnk 
+    ) AS sal_rnk 
   FROM 
     Employee
 ) 
