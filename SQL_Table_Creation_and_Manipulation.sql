@@ -1,4 +1,4 @@
-/* SQL Practice using the MySQL and SQL Server Management Studio Workbench. 
+/* SQL Practice using the MySQL Workbench and SQL Server Management Studio. 
 Created a fictional table for practice */
 
 -- USE SQLTutorial;
