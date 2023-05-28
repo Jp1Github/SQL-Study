@@ -2,8 +2,7 @@
 /* Code is written using MySQL. It uses the LIMIT function and may not work
 in other RDBMS */
 
-DROP 
-  TABLE IF EXISTS Employee;
+DROP TABLE IF EXISTS Employee;
 CREATE TABLE Employee (
   id int, 
   name VARCHAR(10), 
@@ -48,8 +47,7 @@ FROM
 /*
 1. Get the distinct salary.
 */
-SELECT 
-  DISTINCT(salary) 
+SELECT DISTINCT(salary) 
 FROM 
   Employee;
 
@@ -77,9 +75,10 @@ WITH CTE AS (
   FROM 
     Employee
 ) -- Then use a CASE statement
+
 SELECT 
   CASE -- if cnt is just 1 record it means there is no second highest salary.
-  WHEN cnt = 1 THEN NULL -- This is created if requirement is to return a record has NULL
+    WHEN cnt = 1 THEN NULL -- This is created if requirement is to return a record has NULL
   ELSE (
     SELECT 
       DISTINCT(salary) 
@@ -108,7 +107,10 @@ WITH CTE AS (
     Employee
 ) 
 SELECT 
-  CASE WHEN sal_rnk <> 2 THEN NULL ELSE salary END AS second_highest_salary 
+  CASE 
+    WHEN sal_rnk <> 2 THEN NULL 
+    ELSE salary 
+  END AS second_highest_salary 
 FROM 
   CTE -- If CTE returns one row and does not satisfy sal_rnk<> 2 then it return one row only
   -- But if there is several rows return by Cte it will check with all rows
@@ -124,14 +126,16 @@ WITH CTE AS (
   SELECT 
     DISTINCT(SALARY), 
     DENSE_RANK() OVER(
-      ORDER BY 
+  ORDER BY 
         SALARY DESC
     ) sal_rnk 
   FROM 
     Employee
 ) 
 SELECT 
-  CASE WHEN sal_rnk = 2 THEN salary ELSE NULL END AS '2nd highest salary' 
+  CASE 
+    WHEN sal_rnk = 2 THEN salary ELSE NULL 
+  END AS '2nd highest salary' 
 FROM 
   CTE -- If one row return it will return one null row. If three rows was return therefore it will check with all the row
   -- and return a null row if does not satisfy the criteria sal_rnk = 2
