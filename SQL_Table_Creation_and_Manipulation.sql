@@ -11,7 +11,7 @@ CREATE TABLE Employee (
     firstName VARCHAR(50),
     lastName VARCHAR(50),
     date_Of_Birth DATE,
-    gender 	VARCHAR (10),
+    gender VARCHAR (10),
 	position_ID INT
 );
 
@@ -29,7 +29,7 @@ Wrote insert INTO statement all the column name to be explicit!. This can be omi
 -- Employee Table */
 INSERT INTO Employee (
 -- INSERT dbo.Employee (-- This does not work with MySQL 
-	employeeID,
+    employeeID,
     firstName,
     lastName,
     date_Of_Birth,
