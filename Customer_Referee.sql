@@ -1,4 +1,5 @@
 /* Find Customer Referee
+Source: Leetcode SQL 50
 Ranked as Easy
 Table: Customer
 
@@ -57,11 +58,8 @@ CREATE TABLE Customer (
 ;
 
 -- Insert values into the Customer table
-INSERT INTO Customer (
-	id,
-       name,
-       referee_id
-)
+INSERT INTO Customer
+             (id, name, referee_id)
 VALUES 
 	(1, 'Will', NULL),
     	(2, 'Jane', NULL),
@@ -73,9 +71,10 @@ VALUES
 
 /* Using the != operator. Works on both MySQL 
   and SQL Server Management Studio */
-SELECT name
-FROM Customer
-WHERE referee_id != 2 OR referee_id IS NULL
+SELECT name AS Expr1, referee_id AS Expr2, id AS Expr3, Customer.*
+FROM   Customer
+WHERE (referee_id <> 2) OR
+             (referee_id IS NULL)
 ;
 
 /* Using the <> and || as OR. This only work in MySQL 
