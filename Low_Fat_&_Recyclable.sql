@@ -56,8 +56,8 @@ CREATE TABLE Products (
 -- Insert the values
 INSERT INTO Products (
 			product_id,
-    		low_fats,
-    		recyclable
+    			low_fats,
+    			recyclable
 )
 VALUES
 	(0, 'Y', 'N'),
