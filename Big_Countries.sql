@@ -63,14 +63,14 @@ CREATE TABLE World (
 
 -- Insert the values in the World table
 INSERT INTO World (
-	name,
+    name,
     continent,
     area,
     population,
     gdp
 )
 VALUES 
-	('Afghanistan', 'Asia'   ,  652230 , 25500100  ,  20343000000),
+    ('Afghanistan', 'Asia'   ,  652230 , 25500100  ,  20343000000),
     ('Albania'    , 'Europe' ,   28748 ,  2831741  ,  12960000000),
     ('Algeria'    , 'Africa' , 2381741 , 37100000  , 188681000000),
     ('Andorra'    , 'Europe' ,     468 ,    78115  ,   3712000000),
