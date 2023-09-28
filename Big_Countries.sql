@@ -53,7 +53,7 @@ DROP TABLE IF EXISTS World;
 
 -- Create the table World
 CREATE TABLE World (
-	name VARCHAR(20),
+    name VARCHAR(20),
     continent VARCHAR(20),
     area INT,
     population INT,
