@@ -1,4 +1,5 @@
 /* Recyclable and Low Fat Products
+Source: Leetcode SQL 50
 Ranked as Easy
 Table: Products
 
