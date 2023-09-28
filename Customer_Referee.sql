@@ -51,24 +51,24 @@ DROP TABLE IF EXISTS Customer;
 -- Used TINYINT instead of INT to reduce memory since value is only one digit
 CREATE TABLE Customer (
 	id TINYINT,
-    name VARCHAR(10),
-    referee_id TINYINT
+    	name VARCHAR(10),
+    	referee_id TINYINT
 )
 ;
 
 -- Insert values into the Customer table
 INSERT INTO Customer (
 	id,
-    name,
-    referee_id
+       name,
+       referee_id
 )
 VALUES 
 	(1, 'Will', NULL),
-    (2, 'Jane', NULL),
-    (3, 'Alex', 2),
-    (4, 'Bill', NULL),
-    (5, 'Zack', 1),
-    (6, 'Mark', 2)    
+    	(2, 'Jane', NULL),
+    	(3, 'Alex', 2),
+   	 (4, 'Bill', NULL),
+    	(5, 'Zack', 1),
+    	(6, 'Mark', 2)    
 ;
 
 /* Using the != operator. Works on both MySQL 
@@ -87,11 +87,10 @@ WHERE referee_id <> 2 || referee_id IS NULL
 
 
 -- Below code runs faster. For MySQL
-WITH CTE 
-AS (
+WITH CTE AS (
 	SELECT name
-    FROM Customer
-    WHERE referee_id <> 2 || referee_id IS NULL
+    	FROM Customer
+    	WHERE referee_id <> 2 || referee_id IS NULL
 )
 
 SELECT name
@@ -99,11 +98,10 @@ FROM CTE
 ;
 
 -- Below code runs faster. For SQL Server Management Studio
-WITH CTE 
-AS (
+WITH CTE AS (
 	SELECT name
-    FROM Customer
-    WHERE referee_id <> 2 OR referee_id IS NULL
+    	FROM Customer
+    	WHERE referee_id <> 2 OR referee_id IS NULL
 )
 
 SELECT name
