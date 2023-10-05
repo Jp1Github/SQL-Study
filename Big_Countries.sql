@@ -1,4 +1,5 @@
 /* Big Countries
+Source: Leetcode SQL 50
 Ranked as Easy
 Table: World
 
@@ -77,13 +78,13 @@ VALUES
     ('Angola'     , 'Africa' , 1246700 , 20609294  , 100990000000)
 ;
 
--- Query ( 122 ms Leetcode)
+-- Query using the ||. Only works in MySQL
 SELECT name, population, area
 FROM World
 WHERE population >=25000000 || area >=3000000
 ;
 
--- Query ( 114 ms Leetcode)
+-- Query using the OR 
 SELECT name, population, area
 FROM World
 WHERE population >=25000000 OR area >=3000000
