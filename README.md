@@ -1,6 +1,2 @@
 # SQL-Study
-These are codes I wrote studying SQL. 
-Trying to solve questions and finding alternative or several approaches to get the needed results.
-Using MySQL WorkBench and Microsoft Server RDMS gaining insight how those two are similar and its differences.
-However, I will also try other RDMS and learn it too. Any code I put in here will note which RDMS used.
-Sources of questions are from the in internet, Leetcode and others. 
+This is a collection of SQL codes that I wrote as part of my self-study. I used different sources of problems from the internet, such as LeetCode, and tried to find various solutions and approaches to get the desired results. I also experimented with different RDMS, such as MySQL Workbench and Microsoft SQL Server, and learned about their similarities and differences. I will indicate which RDMS I used for each code in this repository. I also plan to explore other RDMS and learn how to use them in the future.
