@@ -64,30 +64,30 @@ DROP TABLE IF EXISTS Employee;
 
 -- Create a table Employee
 CREATE TABLE Employee (
-	empId INT,
-    name VARCHAR(10),
-    supervisor INT,
-    salary INT
+	 empId INT,
+   	 name VARCHAR(10),
+   	 supervisor INT,
+    	 salary INT
 )
 ;
 -- Insert values to Employee table
 INSERT INTO Employee (
 	empId,
-    name,
-    supervisor,
-    salary
+    	name,
+    	supervisor,
+    	salary
 ) 
 VALUES
-	(3, 'Brad', NULL, 4000),
-    (1, 'John', 3, 1000),
-    (2, 'Dan', 3, 2000),
-    (4, 'Thomas', 3, 4000)
+	 (3, 'Brad', NULL, 4000),
+    	 (1, 'John', 3, 1000),
+   	 (2, 'Dan', 3, 2000),
+   	 (4, 'Thomas', 3, 4000)
 ;
 -- Check if the Employee table is populated
-SELECT empId, 
-	   name,
-       supervisor,
-       salary
+SELECT 	empId, 
+ 	name,
+       	supervisor,
+       	salary
 FROM Employee
 ;
 
@@ -96,18 +96,18 @@ DROP TABLE IF EXISTS Bonus;
 
 -- Create Bonus table
 CREATE TABLE Bonus (
-	empId INT,
-    bonus INT
+	 empId INT,
+   	 bonus INT
 )
 ;
 -- Insert values in the Bonus table
 INSERT INTO Bonus(
 	empId,
-    bonus
+    	bonus
 )
 VALUES
 	(2, 500),
-    (4, 2000)
+    	(4, 2000)
 ;
 -- Check if the Bonus table is properly populated
 SELECT empId, bonus
@@ -116,9 +116,9 @@ FROM Bonus
 
 /* Solution -- Accepted in Leetcode
 */
-SELECT emp.name,
+SELECT 	emp.name,
 	 -- emp.salary,
-	   bonus.bonus
+	bonus.bonus
 FROM Employee AS emp
 LEFT JOIN Bonus AS bonus
 	ON emp.empId = bonus.empId
