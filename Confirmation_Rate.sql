@@ -126,22 +126,40 @@ VALUES
 /* Check if the Confirmations table is properly populated */
 SELECT * FROM Confirmations;
 
-SELECT user_id, confirmation_rate
+SELECT user_id, time_stamp
 FROM Signups AS sign_up
 ;
 
+/* Create 2 tables. One for all and other for confirmed */
 SELECT user_id,
 		-- action,
 		COUNT(action) AS action_cnt
 FROM Confirmations
 GROUP BY user_id
-; -- UNION ALL
+; 
+
+/* 
+Ouput
+# user_id	action_cnt
+	3			2
+	7			3
+	2			2
+
+*/
+
+-- 2nd table confirmed
 SELECT user_id,
 		COUNT(action) AS cnt_confirmed
 FROM Confirmations
 WHERE action = 'confirmed'
-GROUP BY user_id;
-
+GROUP BY user_id
+;
+/*
+Output
+# user_id	cnt_confirmed
+	7			3
+	2			1
+*/
 
 -- Self Join the table
 SELECT t1.user_id,
@@ -163,6 +181,12 @@ JOIN
 	) AS t2
     ON t1.user_id = t2.user_id
 ;
+/*
+Output
+# user_id	confirmation_rate
+	7			1.0000
+	2			0.5000
+*/
 
 -- Create a CTE the left join iwht the Signups table
 WITH CTE AS
@@ -188,7 +212,7 @@ JOIN
 
 /* Solution */
 SELECT sign.user_id,
-	   ROUND(COALESCE(c.confirmation_rate, 0),2) AS confirmation_rate
+	   ROUND(COALESCE(c.confirmation_rate, 0), 2) AS confirmation_rate
 FROM Signups AS sign
 LEFT JOIN CTE as c
 	ON sign.user_id = c.user_id
