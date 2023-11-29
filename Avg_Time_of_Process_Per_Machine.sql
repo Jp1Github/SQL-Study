@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS Activity;
 -- Creat Activity table
 CREATE TABLE Activity(
 	machine_id INT,
-   	 process_id INT,
+   	process_id INT,
     	activity_type ENUM('start', 'end') NOT NULL,
     	timestamp FLOAT(5, 3)
 )
@@ -103,7 +103,7 @@ VALUES
 SELECT * FROM Activity;
 
 -- Put in same line the start and end timestamp and substract it.
-SELECT activity_start.machine_id,
+SELECT  activity_start.machine_id,
 	activity_start.process_id,
 	activity_start.timestamp AS timestamp_start,
 	activity_end.timestamp AS timestamp_end,
@@ -120,13 +120,13 @@ JOIN Activity AS activity_end
 ORDER BY activity_start.machine_id ASC
 ;
 /* Result of above
-machine_id	process_id	timestamp_start	timestamp_end	diff_time
-0			0			0.712			1.520			0.808
-0			1			3.140			4.120			0.980
-1			0			0.550			1.550			1.000
-1			1			0.430			1.420			0.990
-2			0			4.100			4.512			0.412
-2			1			2.500			5.000			2.500
+machine_id	process_id		timestamp_start		timestamp_end		diff_time
+0		  0			  0.712			  1.520			0.808
+0		  1			  3.140			  4.120			0.980
+1		  0			  0.550			  1.550			1.000
+1		  1			  0.430			  1.420			0.990
+2		  0			  4.100			  4.512			0.412
+2		  1			  2.500			  5.000			2.500
 */
 
 
