@@ -7,11 +7,11 @@ USE Practice;
 Create a table employee.In SQL Server reference a table "dbo.table_name"; however, "dbo" can be omitted
 DROP TABLE IF EXISTS Employee;
 CREATE TABLE Employee (
-    employeeID INT,
-    firstName VARCHAR(50),
-    lastName VARCHAR(50),
-    date_Of_Birth DATE,
-    gender VARCHAR (10),
+    	employeeID INT,
+    	firstName VARCHAR(50),
+    	lastName VARCHAR(50),
+    	date_Of_Birth DATE,
+    	gender VARCHAR (10),
 	position_ID INT
 );
 
@@ -19,8 +19,8 @@ CREATE TABLE Employee (
 -- Creating table employeePosition (Position ID and Job Title)
 DROP TABLE IF EXISTS employeePosition;
 CREATE TABLE employeePosition (
-    position_ID INT,
-    jobTitle VARCHAR(50)
+    	position_ID INT,
+    	jobTitle VARCHAR(50)
 );
 
 
@@ -28,12 +28,12 @@ CREATE TABLE employeePosition (
 Wrote insert INTO statement all the column name to be explicit!. This can be omitted but not a good practice!
 -- Employee Table */
 INSERT INTO Employee (
--- INSERT dbo.Employee (-- This does not work with MySQL 
-    employeeID,
-    firstName,
-    lastName,
-    date_Of_Birth,
-    gender,
+	-- INSERT dbo.Employee (-- This does not work with MySQL 
+    	employeeID,
+    	firstName,
+    	lastName,
+    	date_Of_Birth,
+    	gender,
 	position_ID 
     )
 VALUES
