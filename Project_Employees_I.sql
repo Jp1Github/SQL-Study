@@ -67,7 +67,7 @@ USE leetcode_sql;
 DROP TABLE IF EXISTS Project;
 CREATE TABLE Project (
 	project_id INT,
-    employee_id INT
+    	employee_id INT
 )
 ;
 -- Insert values to Project table
@@ -76,7 +76,7 @@ INSERT INTO Project (
 	employee_id
     )
 VALUES
-	(1, 1),
+    (1, 1),
     (1, 2),
     (1, 3),
     (2, 1),
@@ -90,7 +90,7 @@ SELECT * FROM Project;
 DROP TABLE IF EXISTS Employee;
 CREATE TABLE Employee (
 	employee_id INT,
-    name VARCHAR(10),
+    	name VARCHAR(10),
 	experience_years INT
 )
 ;
@@ -98,7 +98,7 @@ CREATE TABLE Employee (
 -- Insert values to Employee table
 INSERT INTO Employee (
 	employee_id,
-    name,
+    	name,
 	experience_years
 ) 
 VALUES
@@ -114,8 +114,8 @@ SELECT * FROM Employee;
 /* Combine the two table. In the Project table is only the employee number
 and the experience_years are in the Employee table. We have to combined both
 tables */
-SELECT p.project_id,
-		p.employee_id,
+SELECT  p.project_id,
+	p.employee_id,
         e.name,
         e.experience_years
 FROM Project AS p
@@ -123,17 +123,18 @@ JOIN Employee AS e
 	ON p.employee_id = e.employee_id
 ;
 /*
+Output:
 project_id, 	employee_id, 		name, 		experience_years
-1					1				Khaled			3
-1					2				Ali				2
-1					3				John			1
-2					1				Khaled			3
-2					4				Doe				2
+1		  1			Khaled			3
+1		  2			Ali			2
+1		  3			John			1
+2		  1			Khaled			3
+2		  4			Doe			2
 */
 
 /* The above result we can do an aggregation and using GROUP BY project_id */
 SELECT 	p.project_id,
-		COUNT(e.employee_id) AS employee_count,
+	COUNT(e.employee_id) AS employee_count,
         SUM(e.experience_years) AS sum_of_employees_years,
         (SUM(e.experience_years)/COUNT(e.employee_id)) AS average_years
 FROM Project AS p
@@ -142,15 +143,16 @@ JOIN Employee AS e
 GROUP BY p.project_id
 ;
 /*
+Output:
 project_id, 	employee_count, 	sum_of_employees_years, 	average_years
-	1				3					6						2.0000
-	2				2					5						2.5000
+1			3				6			2.0000
+2			2				5			2.5000
 */
 
 
 /* 1st Solution */
 SELECT 	p.project_id,
-		-- In leetcode it is specified average_years rounded to 2 digits.
+	-- In leetcode it is specified average_years rounded to 2 digits.
         ROUND((SUM(e.experience_years)/COUNT(e.employee_id)),2) AS average_years
 FROM Project AS p
 JOIN Employee AS e
@@ -168,7 +170,6 @@ GROUP BY p.project_id
 ;
 
 /* 
-Output
 Output: 
 +-------------+---------------+
 | project_id  | average_years |
@@ -181,10 +182,10 @@ Output:
 /* 3rd Solution - Using CTE and window function OVER() however the code is long */
 WITH CTE AS (
 	SELECT 	p.project_id,
-			p.employee_id,
-			e.name,
+		p.employee_id,
+		e.name,
 	        SUM(e.employee_id) OVER(PARTITION BY p.project_id) AS sum_of_emp_experience,
-			COUNT(e.employee_id) OVER(PARTITION BY p.project_id) AS emp_cnt
+		COUNT(e.employee_id) OVER(PARTITION BY p.project_id) AS emp_cnt
 	FROM Project AS p
 	JOIN Employee AS e
 		ON p.employee_id = e.employee_id
