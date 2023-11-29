@@ -116,7 +116,7 @@ SELECT
   END AS second_highest_salary 
 FROM 
   CTE -- If CTE returns one row and does not satisfy sal_rnk<> 2 then it return one row only
-  -- But if there is several rows return by Cte it will check with all rows
+  -- But if there is several rows return by CTE it will check with all rows
   -- And return NULL for those rows if it does not satisfy the criteria above
   -- To eliminate include the LIMIT in the CTE
 LIMIT 
