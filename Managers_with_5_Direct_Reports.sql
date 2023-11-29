@@ -49,19 +49,19 @@ DROP TABLE IF EXISTS Employee;
 CREATE TABLE Employee (
 	id INT,
 	name VARCHAR(10),
-    department VARCHAR(5),
-    managerID INT
+    	department VARCHAR(5),
+    	managerID INT
 )
 ;
 -- Insert values to Students table
 INSERT INTO Employee (
 	id,
-    name,
-    department,
-    managerID
+    	name,
+    	department,
+    	managerID
 ) 
 VALUES
-	(101, 'John', 'A', NULL),
+    (101, 'John', 'A', NULL),
     (102, 'Dan', 'A', 101),
     (103, 'James', 'A', 101),
     (104, 'Amy', 'A', 101),
@@ -70,41 +70,41 @@ VALUES
 ;
 -- Check if the Employee table is populated
 SELECT 	managerID, 
-		COUNT(managerID) AS cnt_mgrId
+	COUNT(managerID) AS cnt_mgrId
 FROM Employee
 GROUP BY managerID
 ;
 /*
 Output of above code
 managerID,	 cnt_mgrId
-NULL			0
-101				5
+NULL		    0
+101		    5
 */
 
 SELECT e1.name
 FROM Employee AS e1
 -- Join with a subquery of managerId count
-JOIN (SELECT managerID, 
-		COUNT(managerID) AS cnt_mgrId
+JOIN (
+      SELECT managerID, 
+	     COUNT(managerID) AS cnt_mgrId
       FROM Employee
-      GROUP BY managerID) AS e2
-	ON e1.id = e2.managerID
+      GROUP BY managerID
+     ) AS e2 ON e1.id = e2.managerID
 -- Filter subquey join with managerID count greater or equal to 5
 WHERE cnt_mgrID >= 5
 ;
 
 /* Another Alternative is create a CTE */
 WITH CTE AS (
-			SELECT 	managerID, 
-					COUNT(managerID) AS cnt_mgrId
-			FROM Employee
-			GROUP BY managerID
+	      SELECT managerID, 
+		     COUNT(managerID) AS cnt_mgrId
+	      FROM Employee
+	      GROUP BY managerID
 )
 
 -- Then make the join
 SELECT e1.name
 FROM Employee AS e1
-JOIN CTE as cte
-	ON e1.id = cte.managerID
+JOIN CTE as cte ON e1.id = cte.managerID
 WHERE cte.cnt_mgrId >= 5
 ;
