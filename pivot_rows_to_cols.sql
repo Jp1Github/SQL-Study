@@ -33,15 +33,13 @@ AS
 SELECT 
 	*,
 	CASE 
-		WHEN item_name = 'A' THEN item_value 
+	    WHEN item_name = 'A' THEN item_value 
 	END AS A,
-
 	CASE 
-		WHEN item_name = 'B' THEN ITEM_VALUE 
+	    WHEN item_name = 'B' THEN ITEM_VALUE 
 	END AS B,
-
 	CASE 
-		WHEN ITEM_NAME = 'C' THEN item_value 
+	    WHEN ITEM_NAME = 'C' THEN item_value 
 	END AS C
 FROM rows_to_cols
 ;
