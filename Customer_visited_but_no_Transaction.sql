@@ -75,17 +75,17 @@ DROP TABLE IF EXISTS Visits;
 -- Create Visits table;
 CREATE TABLE Visits(
 	visit_id INT,
-    customer_id INT
+    	customer_id INT
 )
 ;
 
 -- Insert values to Visit table
 INSERT INTO Visits(
 	visit_id,
-    customer_id
+    	customer_id
 )
 VALUES
-	(1, 23),
+    (1, 23),
     (2, 9),
     (4, 30),
     (5, 54),
@@ -103,19 +103,19 @@ DROP TABLE IF EXISTS Transactions;
 -- Create Transactions table
 CREATE TABLE Transactions(
 	transaction_id INT,
-    visit_id INT,
-    amount INT
+    	visit_id INT,
+    	amount INT
 )
 ;
 
 -- Insert values to Transaction table
 INSERT INTO Transactions(
 	transaction_id,
-    visit_id,
-    amount
+    	visit_id,
+    	amount
 )
 VALUES
-	(2, 5, 310),
+    (2, 5, 310),
     (3, 5, 300),
     (9, 5, 200),
     (12, 1, 910),
@@ -157,9 +157,9 @@ an error "Duplicate column name 'visit_id'"
 */
 SELECT t1.customer_id, 
 	-- 	COUNT(t1.transaction_id)
-    COUNT(t1.customer_id) AS count_no_trans
+    	COUNT(t1.customer_id) AS count_no_trans
 FROM
-	-- Use subquery
+    -- Use subquery
     -- MySQL has no FULL OUTER JOIN. Below code is similar for it.
 	(SELECT visits.visit_id, 
 		visits.customer_id, 
@@ -198,8 +198,8 @@ ORDER BY count_no_trans DESC
 
 -- Want to see the result of the FULL JOIN
 SELECT visits.visit_id, 
-		visits.customer_id, 
-		-- transactions.visit_id, Comment out because causing error 'Duplicate column name 'visit_id'
+	visits.customer_id, 
+	-- transactions.visit_id, Comment out because causing error 'Duplicate column name 'visit_id'
         transactions.transaction_id, 
         transactions.amount
 FROM Visits AS visits
