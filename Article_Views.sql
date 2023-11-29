@@ -51,21 +51,21 @@ DROP TABLE IF EXISTS Views;
 -- Create the View table
 CREATE TABLE Views (
 	article_id INT,
-    author_id INT,
-    viewer_id INT,
-    view_date DATE
+    	author_id INT,
+    	viewer_id INT,
+    	view_date DATE
 )
 ;
 
 -- Insert data in the Views table
 INSERT INTO Views (
 	article_id,
-    author_id,
-    viewer_id,
-    view_date
+    	author_id,
+    	viewer_id,
+    	view_date
 )
 VALUES
-	(1, 3, 5, '2019-08-01'),
+    (1, 3, 5, '2019-08-01'),
     (1, 3, 6, '2019-08-02'),
     (2, 7, 7, '2019-08-01'),
     (2, 7, 6, '2019-08-02'),
