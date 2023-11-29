@@ -75,7 +75,7 @@ USE leetcode_sql;
 DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
 	user_id INT,
-    user_name VARCHAR(10)
+    	user_name VARCHAR(10)
 )
 ;
 -- Insert values to Users table
@@ -84,7 +84,7 @@ INSERT INTO Users (
 	user_name
     )
 VALUES
-	(6, 'Alice'),
+    (6, 'Alice'),
     (2, 'Bob'),
     (7, 'Alex')
   ;
@@ -96,14 +96,14 @@ SELECT * FROM Users;
 DROP TABLE IF EXISTS Register;
 CREATE TABLE Register (
 	contest_id INT,
-    user_id INT
+    	user_id INT
 )
 ;
 
 -- Insert values to Register table
 INSERT INTO Register (
 	contest_id,
-    user_id
+    	user_id
 ) 
 VALUES
 	 (215,	6), 
@@ -134,12 +134,12 @@ ORDER BY cnt DESC
 /* 1st Solution */
 SELECT 	contest_id,
 		ROUND(
-				(COUNT(user_id)
-				/
+		    (COUNT(user_id)
+		    /
                 -- Return the number of user id from the Users table
                 -- Subquery is dynamic!
                 (SELECT COUNT(user_id) 
-				 FROM Users) * 100 -- to convert to percentage
+		 FROM Users) * 100 -- to convert to percentage
                   ), 2 -- Round to 2 decimal points
 			) AS percentage
 FROM Register
@@ -150,11 +150,11 @@ ORDER BY percentage DESC, contest_id ASC
 /* 2nd Solution using a CTE */
 WITH CTE AS (
 	SELECT COUNT(user_id) AS cnt
-				 FROM Users
+	FROM Users
 )
 
 SELECT contest_id,
-	   ROUND((COUNT(user_id) / (SELECT cnt FROM CTE)*100),2) AS percentage
+       ROUND((COUNT(user_id) / (SELECT cnt FROM CTE)*100),2) AS percentage
 FROM Register
 GROUP BY contest_id
 ORDER BY percentage DESC, contest_id ASC
