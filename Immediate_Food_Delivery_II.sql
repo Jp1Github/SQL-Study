@@ -120,18 +120,25 @@ Add the True immediate delivery
 
 /* 3rd Step */
 SELECT
-	(ROUND(
-		SUM(IF(t1.min_order_date = t1.min_delivery_date, 1, 0))
-		/
-		COUNT(t1.customer_id) ,
-        2) *100) AS immediate_percentage -- Note on the round number change it to 4 to work in Leetcode!!
+	(
+	  ROUND(
+	     SUM(
+		IF(t1.min_order_date = t1.min_delivery_date, 
+		   1, 0
+		)
+	      ) / COUNT(t1.customer_id) ,
+              2 -- Note on the round number change it to 4 to work in Leetcode!!
+	    ) *100
+	) AS immediate_percentage 
 FROM
-	(SELECT 
-		customer_id,
-		MIN(order_date) AS min_order_date,
-		MIN(customer_pref_delivery_date) AS min_delivery_date
-	FROM Delivery
-	GROUP BY customer_id ) AS t1
+     (
+	SELECT 
+	   customer_id,
+	   MIN(order_date) AS min_order_date,
+	   MIN(customer_pref_delivery_date) AS min_delivery_date
+       FROM Delivery
+       GROUP BY customer_id 
+     ) AS t1
 ;
 /*
 Output:
@@ -141,40 +148,49 @@ Output:
 
 /* Alternate use a CASE statement */
 SELECT
-	(ROUND(
-		SUM( CASE
-			WHEN t1.min_order_date = t1.min_delivery_date THEN 1 
-                        ELSE 0 
-                     END )
-		/
-		COUNT(t1.customer_id) ,
-        2) *100) AS immediate_percentage -- Note on the round number change it to 4 to work in Leetcode!!
+	(
+	  ROUND(
+	     SUM( 
+	        CASE
+	            WHEN t1.min_order_date = t1.min_delivery_date THEN 1 
+                    ELSE 0 
+              END ) / COUNT(t1.customer_id) ,
+            2 -- Note on the round number change it to 4 to work in Leetcode!!
+	   ) *100
+        ) AS immediate_percentage
 FROM
-	(SELECT 
+	(
+	  SELECT 
 		customer_id,
 		MIN(order_date) AS min_order_date,
 		MIN(customer_pref_delivery_date) AS min_delivery_date
-	FROM Delivery
-	GROUP BY customer_id ) AS t1
+	  FROM Delivery
+	 GROUP BY customer_id 
+      ) AS t1
 ;
 
 /* Alternative use of the DATEDIFF Function*/
 SELECT
-	(ROUND(
-		SUM( CASE
-			WHEN DATEDIFF(t1.min_order_date, t1.min_delivery_date)=0 THEN 1 
-                        ELSE 0 
-               	     END )
-		/
-		COUNT(t1.customer_id) ,
+	(
+	  ROUND(
+	     SUM( 
+	       CASE
+		  WHEN DATEDIFF(t1.min_order_date, t1.min_delivery_date)=0 THEN 1 
+                  ELSE 0 
+               END )
+		/ COUNT(t1.customer_id) ,
         -- COUNT(t1.delivery_id
-        2) *100) AS immediate_percentage -- Note on the round number change it to 4 to work in Leetcode!!
+        2
+       ) *100
+    ) AS immediate_percentage -- Note on the round number change it to 4 to work in Leetcode!!
 FROM
-	(SELECT 
-		-- delivery_id 
-		customer_id,
-		MIN(order_date) AS min_order_date,
-		MIN(customer_pref_delivery_date) AS min_delivery_date
-	FROM Delivery
-	GROUP BY customer_id ) AS t1
+   (
+     SELECT 
+	-- delivery_id 
+	customer_id,
+	MIN(order_date) AS min_order_date,
+	MIN(customer_pref_delivery_date) AS min_delivery_date
+     FROM Delivery
+     GROUP BY customer_id 
+  ) AS t1
 ;
