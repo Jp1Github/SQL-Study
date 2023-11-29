@@ -168,8 +168,8 @@ Output:
 
 /* Alternative using CTE */
 WITH CTE AS (
-    SELECT 	p.product_id,
-		    IFNULL(ROUND(SUM(u.units*price)/SUM(u.units), 2), 0) AS average_price
+    SELECT p.product_id,
+	   IFNULL(ROUND(SUM(u.units*price)/SUM(u.units), 2), 0) AS average_price
     FROM Prices AS p
     LEFT JOIN UnitsSold AS u
 	     ON  p.product_id = u.product_id
