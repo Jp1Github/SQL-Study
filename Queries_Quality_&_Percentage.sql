@@ -61,9 +61,9 @@ USE leetcode_sql;
 DROP TABLE IF EXISTS Queries;
 CREATE TABLE Queries (
 	query_name VARCHAR(5),
-    result VARCHAR(20),
-    position INT,
-    rating INT
+    	result VARCHAR(20),
+    	position INT,
+    	rating INT
 )
 ;
 
@@ -71,8 +71,8 @@ CREATE TABLE Queries (
 INSERT INTO Queries (
 	query_name,
 	result,
-    position,
-    rating
+    	position,
+    	rating
     )
 VALUES
 	('Dog',	'Golden Retriever',   1, 	5),
@@ -88,7 +88,7 @@ SELECT * FROM Queries;
 
 /* 1st Solution */
 SELECT 	query_name,
-		ROUND(SUM(rating/position)/COUNT(query_name),2) AS quality,
+	ROUND(SUM(rating/position)/COUNT(query_name),2) AS quality,
         ROUND((SUM(rating < 3)/COUNT(query_name))*100, 2) AS poor_query_percentage
 FROM Queries
 GROUP BY query_name
@@ -96,7 +96,7 @@ GROUP BY query_name
 
 /* 2nd Solution */
 SELECT 	query_name,
-		ROUND(AVG(rating/position), 2) AS quality,
+	ROUND(AVG(rating/position), 2) AS quality,
         ROUND(SUM(IF(rating < 3, 1, 0))/ COUNT(query_name)*100, 2) AS poor_query_percentage
 FROM Queries
 GROUP BY query_name
@@ -105,30 +105,30 @@ GROUP BY query_name
 /* Breakdown on the poor_query_percentage*/
 -- Step 1.
 SELECT 	query_name,
-		(rating < 3) AS rating_lessthan_3
+	(rating < 3) AS rating_lessthan_3
 FROM Queries
 ;
 /*
 Output: One (1) is True and Zero (0) False
 # query_name	rating_lessthan_3
-Dog					0
-Dog					0
-Dog					1
-Cat					1
-Cat					0
-Cat					0
+Dog			0
+Dog			0
+Dog			1
+Cat			1
+Cat			0
+Cat			0
 
 */
 
 -- Step 2. Do an aggregation AVG and using GROUP BY
 SELECT 	query_name,
-		AVG((rating < 3)) AS avg_rating_lessthan_3
+	AVG((rating < 3)) AS avg_rating_lessthan_3
 FROM Queries
 GROUP BY query_name
 ;
 /*
 # query_name	avg_rating_lessthan_3
-Dog					0.3333
-Cat					0.3333
+Dog			0.3333
+Cat			0.3333
 
 */
