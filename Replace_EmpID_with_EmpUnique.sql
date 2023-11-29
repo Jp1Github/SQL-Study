@@ -72,24 +72,24 @@ DROP TABLE IF EXISTS EmployeeUNI;
 -- Create Employees table
 CREATE TABLE Employees(
 	id INT,
-    name VARCHAR(10)
+    	name VARCHAR(10)
 )
 ;
 
 -- Create the EmployeeUNI table
 CREATE TABLE EmployeeUNI(
 	id INT,
-    unique_id INT
+    	unique_id INT
 )
 ;
 
 -- Insert the value in the Employee table
 INSERT INTO Employees(
 	id,
-    name
+    	name
 )
 VALUES
-	(1, 'Alice'),
+    (1, 'Alice'),
     (7, 'Bob'),
     (11, 'Meir'),
     (90, 'Wiston'),
@@ -104,10 +104,10 @@ FROM Employees
 -- Insert values in the EmployeeUNI table
 INSERT INTO EmployeeUNI(
 	id,
-    unique_id
+    	unique_id
 )
 VALUES
-	(3, 1),
+    (3, 1),
     (11, 2),
     (90, 3)
 ;
@@ -120,6 +120,5 @@ FROM EmployeeUNI
 -- Query
 SELECT EmpUni.unique_id , Emp.name
 FROM Employees AS Emp
-LEFT JOIN EmployeeUNI AS EmpUni
-	ON Emp.id = EmpUni.id
+LEFT JOIN EmployeeUNI AS EmpUni ON Emp.id = EmpUni.id
 ;
