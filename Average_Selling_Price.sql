@@ -109,10 +109,10 @@ INSERT INTO UnitsSold (
 	units
 ) 
 VALUES
-	(1,	'2019-02-25', 100), 
-	(1,	'2019-03-01',  15),  
-	(2,	'2019-02-10', 200), 
-	(2,	'2019-03-22',  30) 
+	(1, '2019-02-25', 100), 
+	(1, '2019-03-01',  15),  
+	(2, '2019-02-10', 200), 
+	(2, '2019-03-22',  30) 
 ;
 
 /* Check if the UnitsSold table is properly populated */
@@ -120,11 +120,11 @@ SELECT * FROM UnitsSold;
 
 /* 1st Solution */
 SELECT 	p.product_id,
--- 	   p.start_date,
---         p.end_date,
---         u.purchase_date,
---         p.price,
---         u.units
+	-- p.start_date,
+	-- p.end_date,
+	-- u.purchase_date,
+	-- p.price,
+	-- u.units
 	IFNULL(ROUND(SUM(u.units*price)/SUM(u.units), 2), 0) AS average_price
 FROM Prices AS p
 JOIN UnitsSold AS u
@@ -145,11 +145,11 @@ SELECT t.product_id,
         t.average_price
 FROM (
         SELECT 	p.product_id,
-    --  p.start_date,
-    --  p.end_date,
-    --  u.purchase_date,
-    --  p.price,
---         u.units
+    		-- p.start_date,
+   		-- p.end_date,
+    		-- u.purchase_date,
+    		-- p.price,
+    		-- u.units
 		IFNULL(ROUND(SUM(u.units*price)/SUM(u.units), 2), 0) AS average_price
         FROM Prices AS p
         LEFT JOIN UnitsSold AS u
