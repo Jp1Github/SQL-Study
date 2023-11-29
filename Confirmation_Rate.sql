@@ -84,7 +84,7 @@ CREATE TABLE Signups (
 -- Insert values to Signups table
 INSERT INTO Signups (
 	user_id,
-    time_stamp
+    	time_stamp
 ) 
 VALUES
 	(3, '2020-03-21 10:16:13'),
@@ -102,16 +102,16 @@ SELECT * FROM Signups;
 DROP TABLE IF EXISTS Confirmations;
 CREATE TABLE Confirmations (
 	user_id INT,
-    time_stamp DATETIME,
-    action ENUM ('timeout', 'confirmed')
+    	time_stamp DATETIME,
+        action ENUM ('timeout', 'confirmed')
 )
 ;
 
 -- Insert the values in the Confirmation table
 INSERT INTO Confirmations (
 	user_id,
-    time_stamp,
-    action
+        time_stamp,
+        action
 )
 VALUES
 	(3, '2021-01-06 03:30:46', 'timeout'),
@@ -131,9 +131,9 @@ FROM Signups AS sign_up
 ;
 
 /* Create 2 tables. One for all and other for confirmed */
-SELECT user_id,
-		-- action,
-		COUNT(action) AS action_cnt
+SELECT 	user_id,
+	-- action,
+	COUNT(action) AS action_cnt
 FROM Confirmations
 GROUP BY user_id
 ; 
@@ -141,15 +141,15 @@ GROUP BY user_id
 /* 
 Ouput
 # user_id	action_cnt
-	3			2
-	7			3
-	2			2
+  3		  2
+  7		  3
+  2		  2
 
 */
 
 -- 2nd table confirmed
-SELECT user_id,
-		COUNT(action) AS cnt_confirmed
+SELECT  user_id,
+	COUNT(action) AS cnt_confirmed
 FROM Confirmations
 WHERE action = 'confirmed'
 GROUP BY user_id
@@ -157,63 +157,60 @@ GROUP BY user_id
 /*
 Output
 # user_id	cnt_confirmed
-	7			3
-	2			1
+  7			3
+  2			1
 */
 
 -- Self Join the table
-SELECT t1.user_id,
-	   (t2.cnt_confirmed/t1.action_cnt) AS confirmation_rate
+SELECT  t1.user_id,
+	(t2.cnt_confirmed/t1.action_cnt) AS confirmation_rate
 FROM (
-		SELECT user_id,
-			  -- action,
-			  COUNT(action) AS action_cnt
-		FROM Confirmations
-		GROUP BY user_id 
+	SELECT  user_id,
+		 -- action,
+		COUNT(action) AS action_cnt
+	FROM Confirmations
+	GROUP BY user_id 
 	) AS t1
 JOIN
 	(
-		SELECT user_id,
-			   COUNT(action) AS cnt_confirmed
-		FROM Confirmations
-		WHERE action = 'confirmed'
-		GROUP BY user_id
-	) AS t2
-    ON t1.user_id = t2.user_id
+	SELECT  user_id,
+		COUNT(action) AS cnt_confirmed
+	FROM Confirmations
+	WHERE action = 'confirmed'
+	GROUP BY user_id
+	) AS t2 ON t1.user_id = t2.user_id
 ;
 /*
 Output
 # user_id	confirmation_rate
-	7			1.0000
-	2			0.5000
+  7			1.0000
+  2			0.5000
 */
 
 -- Create a CTE the left join iwht the Signups table
 WITH CTE AS
 	( SELECT t1.user_id,
-	   (t2.cnt_confirmed/t1.action_cnt) AS confirmation_rate
+	(t2.cnt_confirmed/t1.action_cnt) AS confirmation_rate
 FROM (
-		SELECT user_id,
-			  -- action,
-			  COUNT(action) AS action_cnt
-		FROM Confirmations
-		GROUP BY user_id 
+	SELECT  user_id,
+		-- action,
+		COUNT(action) AS action_cnt
+	FROM Confirmations
+	GROUP BY user_id 
 	) AS t1
 JOIN
 	(
-		SELECT user_id,
-			   COUNT(action) AS cnt_confirmed
-		FROM Confirmations
-		WHERE action = 'confirmed'
-		GROUP BY user_id
-	) AS t2
-    ON t1.user_id = t2.user_id
+	SELECT  user_id,
+		COUNT(action) AS cnt_confirmed
+	FROM Confirmations
+	WHERE action = 'confirmed'
+	GROUP BY user_id
+	) AS t2 ON t1.user_id = t2.user_id
 )
 
 /* Solution */
 SELECT sign.user_id,
 	   ROUND(COALESCE(c.confirmation_rate, 0), 2) AS confirmation_rate
 FROM Signups AS sign
-LEFT JOIN CTE as c
-	ON sign.user_id = c.user_id
+LEFT JOIN CTE as c ON sign.user_id = c.user_id
 ;
