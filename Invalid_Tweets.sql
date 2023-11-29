@@ -47,24 +47,24 @@ DROP TABLE IF EXISTS Tweets;
 -- Create a table
 CREATE TABLE Tweets (
 	tweet_id INT,
-    content VARCHAR(100)
+        content VARCHAR(100)
 )
 ;
 
 -- Insert values to Tweets table
 INSERT INTO Tweets (
 	tweet_id,
-    content
+        content
 ) 
 VALUES
-	(1, 'Vote for Biden'),
+    (1, 'Vote for Biden'),
     (2, 'Let us make America great again')
 ;
 
 -- See the tweet length of each id
 SELECT  tweet_id, 
-		-- CHAR_LENGTH(content) AS tweet_len -- For MySQL
-		LEN(content) AS tweet_len -- For MySQL
+	-- CHAR_LENGTH(content) AS tweet_len -- For MySQL
+	LEN(content) AS tweet_len -- For MySQL
 FROM Tweets
 ;
 
