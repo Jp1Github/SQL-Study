@@ -135,7 +135,7 @@ SELECT
 	ROUND(
 			(SELECT 
 				COUNT(DISTINCT(t1.player_id)) AS num_first_log_players
-				-- 	t1.player_id,
+				--     t1.player_id,
 				--     t1.event_date,
 				--     t2.first_log,
 				--     t1.event_date - t2.first_log AS diff
