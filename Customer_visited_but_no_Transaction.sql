@@ -131,12 +131,13 @@ Visits table visit_id is not in the Transaction table visit_id olumn
 */
 -- Join the Visits and Transaction table
 SELECT visits.customer_id,
-       COUNT(visits.visit_id)
+       COUNT(visits.visit_id) AS count_no_trans
 FROM Visits AS visits
 LEFT JOIN Transactions AS transactions
 	ON visits.visit_id = transactions.visit_id
 WHERE visits.visit_id NOT IN (SELECT visit_id FROM transactions)
 GROUP BY visits.customer_id
+ORDER BY count_no_trans DESC, customer_id ASC
 ;
 
 /* First solution is using the LEFT JOIN and checking if the 

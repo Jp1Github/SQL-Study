@@ -4,7 +4,7 @@ Created a fictional table for practice */
 -- USE SQLTutorial;
 USE Practice;
 
-Create a table employee.In SQL Server reference a table "dbo.table_name"; however, "dbo" can be omitted
+-- Create a table employee.In SQL Server reference a table "dbo.table_name"; however, "dbo" can be omitted
 DROP TABLE IF EXISTS Employee;
 CREATE TABLE Employee (
     employeeID INT,
