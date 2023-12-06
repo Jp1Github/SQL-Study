@@ -56,7 +56,7 @@ USE leetcode_sql;
 DROP TABLE IF EXISTS Teacher;
 CREATE TABLE Teacher (
 	teacher_id INT,
-    subject_id INT NOT NULL,
+    	subject_id INT NOT NULL,
 	dept_id INT NOT NULL,
     CONSTRAINT subj_dept PRIMARY KEY (subject_id, dept_id)
 )
@@ -65,8 +65,8 @@ CREATE TABLE Teacher (
 -- Insert values to Teacher table
 INSERT INTO Teacher (
 	teacher_id,
-    subject_id,
-    dept_id
+    	subject_id,
+    	dept_id
     )
 VALUES
 	(1, 2,	3),  
@@ -83,7 +83,7 @@ SELECT * FROM Teacher;
 
 /* Solution */
 SELECT
-	teacher_id,
+    teacher_id,
     COUNT(DISTINCT(subject_id)) AS cnt
 FROM Teacher
 GROUP BY teacher_id
