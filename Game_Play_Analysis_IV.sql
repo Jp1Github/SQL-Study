@@ -79,9 +79,9 @@ GROUP BY player_id
 ;
 /*
 # player_id		first_log
-	1			2016-03-01
-	2			2017-06-25
-	3			2016-03-02
+	1		2016-03-01
+	2		2017-06-25
+	3		2016-03-02
 */
 
 SELECT COUNT(DISTINCT(player_id)) AS Total_Distinct_player FROM Activity;
