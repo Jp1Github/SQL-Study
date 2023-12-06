@@ -54,18 +54,18 @@ USE leetcode_sql;
 DROP TABLE IF EXISTS Activity;
 CREATE TABLE Activity (
 	user_id INT,
-    session_id INT,
+    	session_id INT,
 	activity_date DATE,
-    activity_type ENUM ('open_session', 'end_session', 'scroll_down', 'send_message')
+    	activity_type ENUM ('open_session', 'end_session', 'scroll_down', 'send_message')
 )
 ;
 
 -- Insert values to Activity table
 INSERT INTO Activity (
 	user_id,
-    session_id,
+    	session_id,
 	activity_date,
-    activity_type
+    	activity_type
     )
 VALUES
 	(1, 1,	'2019-07-20', 'open_session'),
@@ -87,7 +87,7 @@ SELECT * FROM Activity;
 /* Solution - Not work in complete Leetcode dataset*/
 SELECT -- *
 	activity_date AS day,
-    COUNT(DISTINCT(user_id)) AS active_user
+    	COUNT(DISTINCT(user_id)) AS active_user
 FROM Activity
 WHERE activity_date BETWEEN DATE_SUB('2019-07-27', INTERVAL 29 DAY) AND '2019-07-27'
 GROUP BY activity_date
@@ -96,7 +96,7 @@ GROUP BY activity_date
 /* 2nd Solution */
 SELECT -- *,
 	activity_date AS day,
-    COUNT(DISTINCT(user_id)) AS active_users
+    	COUNT(DISTINCT(user_id)) AS active_users
 FROM Activity
 WHERE DATEDIFF('2019-07-27', activity_date) <=29 AND activity_date <= '2019-07-27'
 GROUP BY activity_date
@@ -105,14 +105,14 @@ GROUP BY activity_date
 /*3rd Using CTE */
 WITH CTE AS 
 	(SELECT 
-			activity_date,
-            user_id
+		activity_date,
+            	user_id
 FROM Activity
 WHERE DATEDIFF('2019-07-27', activity_date) <=29 AND activity_date <= '2019-07-27'
 )
 
 SELECT
-		activity_date AS day,
-		COUNT(DISTINCT(user_id)) AS active_users
+	activity_date AS day,
+	COUNT(DISTINCT(user_id)) AS active_users
 FROM CTE
 GROUP BY activity_date;
