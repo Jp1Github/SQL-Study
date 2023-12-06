@@ -90,8 +90,8 @@ SELECT COUNT(DISTINCT(player_id)) AS Total_Distinct_player FROM Activity;
 SELECT 
 	-- COUNT(DISTINCT(t1.player_id)) AS num_first_log_players
 	t1.player_id,
-    t1.event_date,
-    t2.first_log
+        t1.event_date,
+        t2.first_log
 FROM Activity AS t1
 JOIN 
 	(SELECT
