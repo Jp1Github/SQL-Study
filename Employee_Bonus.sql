@@ -120,8 +120,7 @@ SELECT 	emp.name,
 	 -- emp.salary,
 	bonus.bonus
 FROM Employee AS emp
-LEFT JOIN Bonus AS bonus
-	ON emp.empId = bonus.empId
+LEFT JOIN Bonus AS bonus ON emp.empId = bonus.empId
 WHERE bonus.bonus IS NULL OR bonus.bonus < 1000
 ;
 
@@ -130,10 +129,9 @@ SELECT DISTINCT(emp.name),
 	   b.bonus
 FROM Employee AS emp
 LEFT JOIN (
-SELECT empId, bonus
-FROM bonus
+	    SELECT empId, bonus
+	    FROM bonus
 -- WHERE bonus < 1000  
-) AS b
-ON b.empId = emp.empId
+	  ) AS b ON b.empId = emp.empId
 WHERE b.bonus IS NULL OR b.bonus < 1000
 

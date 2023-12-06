@@ -58,7 +58,7 @@ CREATE TABLE Customer (
 ;
 
 -- Insert values into the Customer table
-INSERT INTO Customer
+INSERT INTO  Customer
              (id, name, referee_id)
 VALUES 
 	(1, 'Will', NULL),
@@ -73,8 +73,7 @@ VALUES
   and SQL Server Management Studio */
 SELECT name AS Expr1, referee_id AS Expr2, id AS Expr3, Customer.*
 FROM   Customer
-WHERE (referee_id <> 2) OR
-             (referee_id IS NULL)
+WHERE (referee_id <> 2) OR (referee_id IS NULL)
 ;
 
 /* Using the <> and || as OR. This only work in MySQL 

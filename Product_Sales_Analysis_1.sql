@@ -73,23 +73,23 @@ DROP TABLE IF EXISTS Sales;
 -- Create the Sales table
 CREATE TABLE Sales(
 	sale_id INT,
-    product_id INT,
-    year INT,
-    quantity INT,
-    price INT
+    	product_id INT,
+   	 year INT,
+    	quantity INT,
+    	price INT
 )
 ;
 
 -- Insert values in the sales table
 INSERT INTO Sales(
 	sale_id,
-    product_id,
-    year,
-    quantity,
-    price
+    	product_id,
+   	 year,
+    	quantity,
+    	price
 )
 VALUES
-	(1, 100, 2008, 10, 5000),
+    (1, 100, 2008, 10, 5000),
     (2, 100, 2009, 12, 5000),
     (7, 200, 2011, 15, 9000)
 ;
@@ -103,17 +103,17 @@ DROP TABLE IF EXISTS Product;
 -- Create th Product table
 CREATE TABLE Product(
 	product_id INT,
-    product_name VARCHAR(10)
+    	product_name VARCHAR(10)
 )
 ;
 
 -- Insert values in the Product table
 INSERT INTO Product(
 	product_id,
-    product_name
+    	product_name
 )
 VALUES
-	(100, 'Nokia'),
+    (100, 'Nokia'),
     (200, 'Apple'),
     (300,  'Samsung')
 ;
@@ -125,6 +125,5 @@ SELECT * FROM Sales;
 -- Query
 SELECT products.product_name, sales.year, sales.price
 FROM Product AS products
-JOIN Sales AS sales
-	ON products.product_id = sales.product_id
+JOIN Sales AS sales ON products.product_id = sales.product_id
 ;

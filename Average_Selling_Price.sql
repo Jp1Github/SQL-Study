@@ -71,9 +71,9 @@ USE leetcode_sql;
 DROP TABLE IF EXISTS Prices;
 CREATE TABLE Prices (
 	product_id INT,
-    start_date DATE,
+    	start_date DATE,
 	end_date DATE,
-    price INT
+    	price INT
 )
 ;
 -- Insert values to Prices table
@@ -81,7 +81,7 @@ INSERT INTO Prices (
 	product_id,
 	start_date,
 	end_date,
-    price
+    	price
 ) 
 VALUES
 	(1, '2019-02-17', '2019-02-28',	 5), 
@@ -97,7 +97,7 @@ SELECT * FROM Prices;
 DROP TABLE IF EXISTS UnitsSold;
 CREATE TABLE UnitsSold (
 	product_id INT,
-    purchase_date DATE,
+    	purchase_date DATE,
 	units INT
 )
 ;
@@ -105,14 +105,14 @@ CREATE TABLE UnitsSold (
 -- Insert values to UnitsSold table
 INSERT INTO UnitsSold (
 	product_id,
-    purchase_date,
+    	purchase_date,
 	units
 ) 
 VALUES
-	(1,	'2019-02-25', 100), 
-	(1,	'2019-03-01',  15),  
-	(2,	'2019-02-10', 200), 
-	(2,	'2019-03-22',  30) 
+	(1, '2019-02-25', 100), 
+	(1, '2019-03-01',  15),  
+	(2, '2019-02-10', 200), 
+	(2, '2019-03-22',  30) 
 ;
 
 /* Check if the UnitsSold table is properly populated */
@@ -120,24 +120,24 @@ SELECT * FROM UnitsSold;
 
 /* 1st Solution */
 SELECT 	p.product_id,
-	-- 	p.start_date,
---         p.end_date,
---         u.purchase_date,
---         p.price,
---         u.units
-		IFNULL(ROUND(SUM(u.units*price)/SUM(u.units), 2), 0) AS average_price
+	-- p.start_date,
+	-- p.end_date,
+	-- u.purchase_date,
+	-- p.price,
+	-- u.units
+	IFNULL(ROUND(SUM(u.units*price)/SUM(u.units), 2), 0) AS average_price
 FROM Prices AS p
 JOIN UnitsSold AS u
 	ON p.product_id = u.product_id
-    AND u.purchase_date BETWEEN p.start_date AND p.end_date
+        AND u.purchase_date BETWEEN p.start_date AND p.end_date
 GROUP BY p.product_id
 ;
 
 /*
 Output:
 # product_id	average_price
-	1				6.96
-	2				16.96
+	1	   6.96
+	2	  16.96
 */
 
 /* 2nd Solution using a subquery at the FROM statement */
@@ -145,35 +145,35 @@ SELECT t.product_id,
         t.average_price
 FROM (
         SELECT 	p.product_id,
-    --  p.start_date,
-    --  p.end_date,
-    --  u.purchase_date,
-    --  p.price,
---         u.units
+    		-- p.start_date,
+   		-- p.end_date,
+    		-- u.purchase_date,
+    		-- p.price,
+    		-- u.units
 		IFNULL(ROUND(SUM(u.units*price)/SUM(u.units), 2), 0) AS average_price
         FROM Prices AS p
         LEFT JOIN UnitsSold AS u
 	        ON p.product_id = u.product_id
-            AND u.purchase_date BETWEEN p.start_date AND p.end_date
+                AND u.purchase_date BETWEEN p.start_date AND p.end_date
         GROUP BY p.product_id
     ) AS t
 ;
 /*
 Output:
 # product_id	average_price
-	1				6.96
-	2				16.96
+	1	   6.96
+	2	  16.96
 */
 
 
 /* Alternative using CTE */
 WITH CTE AS (
-    SELECT 	p.product_id,
-		    IFNULL(ROUND(SUM(u.units*price)/SUM(u.units), 2), 0) AS average_price
+    SELECT p.product_id,
+	   IFNULL(ROUND(SUM(u.units*price)/SUM(u.units), 2), 0) AS average_price
     FROM Prices AS p
     LEFT JOIN UnitsSold AS u
 	     ON  p.product_id = u.product_id
-         AND u.purchase_date BETWEEN p.start_date AND p.end_date
+             AND u.purchase_date BETWEEN p.start_date AND p.end_date
     GROUP BY p.product_id
 )
 

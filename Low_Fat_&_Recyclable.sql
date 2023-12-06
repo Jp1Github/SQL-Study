@@ -48,17 +48,17 @@ USE leetcode_sql;
 DROP TABLE IF EXISTS Products;
 
 CREATE TABLE Products (
-			 product_id SMALLINT,
-			 low_fats CHAR,
-			 recyclable CHAR
+	product_id SMALLINT,
+	low_fats CHAR,
+	recyclable CHAR
 )
 ;
 
 -- Insert the values
 INSERT INTO Products (
-			product_id,
-    			low_fats,
-    			recyclable
+	product_id,
+    	low_fats,
+    	recyclable
 )
 VALUES
 	(0, 'Y', 'N'),

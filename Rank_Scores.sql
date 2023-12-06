@@ -60,7 +60,8 @@ CREATE TABLE scores (id INT, score DECIMAL(10, 2),);
 
 /* Insert values in score Table */
 INSERT INTO scores (id, score)
-VALUES (1, 3.50),
+VALUES 
+    (1, 3.50),
     (2, 3.65),
     (3, 4.00),
     (4, 3.85),
@@ -69,16 +70,12 @@ VALUES (1, 3.50),
 
 /* Code Solution */
 SELECT score,
-    DENSE_RANK() OVER(
-        ORDER BY score DESC
-    ) AS rank
+    DENSE_RANK() OVER( ORDER BY score DESC ) AS rank
 FROM scores;
 
 -- To show only Distinct score ranking.
 SELECT DISTINCT(score),
-    DENSE_RANK() OVER(
-        ORDER BY score DESC
-    ) AS rank
+    DENSE_RANK() OVER( ORDER BY score DESC ) AS rank
 FROM scores
 ORDER BY rank;
 

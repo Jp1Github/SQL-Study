@@ -47,26 +47,26 @@ USE leetcode_sql;
 DROP TABLE IF EXISTS Transactions;
 CREATE TABLE Transactions (
 	id INT,
-    country VARCHAR(10),
-    state ENUM("approved", "declined"),
-    amount INT,
-    trans_date DATE
+    	country VARCHAR(10),
+    	state ENUM("approved", "declined"),
+    	amount INT,
+    	trans_date DATE
 )
 ;
 
 -- Insert values to Queries table
 INSERT INTO Transactions (
-	id,
+     id,
     country,
     state,
     amount,
     trans_date
     )
 VALUES
-	(121,	'US',	'approved',		1000,	'2018-12-18'),
-	(122,	'US',	'declined',		2000,	'2018-12-19'),
-	(123,	'US',	'approved',		2000,	'2019-01-01'),
-	(124,   'DE',	'approved',		2000,	'2019-01-07')
+	(121,	'US',	'approved',	1000,	'2018-12-18'),
+	(122,	'US',	'declined',	2000,	'2018-12-19'),
+	(123,	'US',	'approved',	2000,	'2019-01-01'),
+	(124,   'DE',	'approved',	2000,	'2019-01-07')
 ;	
 
 /* Check if the Queries table is properly populated */
@@ -74,8 +74,8 @@ SELECT * FROM Transactions;
 
 /* 1st. Solution */
 SELECT 
-		DATE_FORMAT(trans_date,'%Y-%m') AS month,
-		country, 
+	DATE_FORMAT(trans_date,'%Y-%m') AS month,
+	country, 
         COUNT(state) AS trans_count,
         SUM(CASE WHEN state='approved' THEN 1 ELSE 0 END) AS approved_count,
         SUM(amount) AS trans_total_amount,
@@ -109,7 +109,7 @@ CREATE VIEW CTE_2 AS
 
 /* Then combine the 2 views together by month and country */
 SELECT 
-	c1.month,
+    c1.month,
     c1.country,
     c1.trans_count,
     c2.approved_count,

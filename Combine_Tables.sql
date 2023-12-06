@@ -127,8 +127,7 @@ FROM Person AS p ;
 /* Complicated code using LEFT JOIN, RIGHT JOIN and INTERSECT. */
 SELECT firstName, lastName, p.personID, a.city, a.state
 FROM Person AS p
-LEFT JOIN Address AS a
-	ON p.personId = a.personID
+LEFT JOIN Address AS a ON p.personId = a.personID
 INTERSECT
 SELECT 
 	firstName,
@@ -137,6 +136,5 @@ SELECT
 	a.city, 
 	a.state 
 FROM Address AS a
-RIGHT JOIN Person AS p
-	ON p.personId = a.personID ;
+RIGHT JOIN Person AS p ON p.personId = a.personID ;
 

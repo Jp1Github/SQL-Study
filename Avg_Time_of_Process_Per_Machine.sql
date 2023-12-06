@@ -71,21 +71,21 @@ DROP TABLE IF EXISTS Activity;
 -- Creat Activity table
 CREATE TABLE Activity(
 	machine_id INT,
-    process_id INT,
-    activity_type ENUM('start', 'end') NOT NULL,
-    timestamp FLOAT(5, 3)
+   	process_id INT,
+    	activity_type ENUM('start', 'end') NOT NULL,
+    	timestamp FLOAT(5, 3)
 )
 ;
 
 -- Insert values to Activity table
 INSERT INTO Activity(
 	machine_id,
-    process_id,
-    activity_type,
-    timestamp
+    	process_id,
+    	activity_type,
+    	timestamp
 )
 VALUES
-	(0, 0, 'start', 0.712),
+    (0, 0, 'start', 0.712),
     (0, 0, 'end', 1.520),
     (0, 1, 'start', 3.140),
     (0, 1, 'end', 4.120),
@@ -103,7 +103,7 @@ VALUES
 SELECT * FROM Activity;
 
 -- Put in same line the start and end timestamp and substract it.
-SELECT activity_start.machine_id,
+SELECT  activity_start.machine_id,
 	activity_start.process_id,
 	activity_start.timestamp AS timestamp_start,
 	activity_end.timestamp AS timestamp_end,
@@ -120,13 +120,13 @@ JOIN Activity AS activity_end
 ORDER BY activity_start.machine_id ASC
 ;
 /* Result of above
-machine_id	process_id	timestamp_start	timestamp_end	diff_time
-0			0			0.712			1.520			0.808
-0			1			3.140			4.120			0.980
-1			0			0.550			1.550			1.000
-1			1			0.430			1.420			0.990
-2			0			4.100			4.512			0.412
-2			1			2.500			5.000			2.500
+machine_id	process_id		timestamp_start		timestamp_end		diff_time
+0		  0			  0.712			  1.520			0.808
+0		  1			  3.140			  4.120			0.980
+1		  0			  0.550			  1.550			1.000
+1		  1			  0.430			  1.420			0.990
+2		  0			  4.100			  4.512			0.412
+2		  1			  2.500			  5.000			2.500
 */
 
 
@@ -139,9 +139,9 @@ SELECT activity_start.machine_id,
 FROM Activity AS activity_start
 JOIN Activity AS activity_end
 	ON activity_start.activity_type = 'start' 
-		AND activity_end.activity_type = 'end'
+	AND activity_end.activity_type = 'end'
        	AND activity_start.process_id = activity_end.process_id
-		AND activity_start.machine_id = activity_end.machine_id
+	AND activity_start.machine_id = activity_end.machine_id
    -- Need below because of the aggregation at the SELECT statement
 GROUP BY activity_start.machine_id
 ORDER BY activity_start.machine_id ASC
@@ -153,20 +153,20 @@ ORDER BY activity_start.machine_id ASC
 SELECT * FROM Activity;
 
 SELECT 	activity_start.machine_id,
-		activity_start.process_id,
-		activity_start.timestamp AS timestamp_start, 
+	activity_start.process_id,
+	activity_start.timestamp AS timestamp_start, 
         activity_end.timestamp AS timestamp_end,
         (activity_end.timestamp - activity_start.timestamp) AS time_diff
 FROM 
 	(SELECT * 
-    FROM Activity
-    WHERE activity_type = 'start') AS activity_start
+    	FROM Activity
+    	WHERE activity_type = 'start') AS activity_start
     ,
-    (SELECT *
-    FROM Activity
-    WHERE activity_type = 'end') AS activity_end
+    	(SELECT *
+    	FROM Activity
+    	WHERE activity_type = 'end') AS activity_end
 WHERE activity_start.machine_id = activity_end.machine_id
-	AND activity_start.process_id = activity_end.process_id
+AND activity_start.process_id = activity_end.process_id
 ORDER BY activity_start.machine_id ASC
 ;
 
@@ -174,20 +174,20 @@ ORDER BY activity_start.machine_id ASC
 After the above code use the aggregation AVG and ROUND by 3 digits
 */
 SELECT 	activity_start.machine_id,
-		-- activity_start.process_id,
-		-- activity_start.timestamp AS timestamp_start, 
+	-- activity_start.process_id,
+	-- activity_start.timestamp AS timestamp_start, 
         -- activity_end.timestamp AS timestamp_end,
         ROUND(AVG(activity_end.timestamp - activity_start.timestamp),3) AS processing_time
 FROM 
 	(SELECT * 
-    FROM Activity
-    WHERE activity_type = 'start') AS activity_start
+    	FROM Activity
+    	WHERE activity_type = 'start') AS activity_start
     ,
-    (SELECT *
-    FROM Activity
-    WHERE activity_type = 'end') AS activity_end
+    	(SELECT *
+    	FROM Activity
+    	WHERE activity_type = 'end') AS activity_end
 WHERE activity_start.machine_id = activity_end.machine_id
-	AND activity_start.process_id = activity_end.process_id
+AND activity_start.process_id = activity_end.process_id
 GROUP BY activity_start.machine_id
 ORDER BY activity_start.machine_id ASC
 ;

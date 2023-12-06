@@ -50,9 +50,9 @@ USE leetcode_sql;
 DROP TABLE IF EXISTS Cinema;
 CREATE TABLE Cinema (
 	id INT,
-    movie VARCHAR(20),
-    description VARCHAR(50),
-    rating FLOAT
+    	movie VARCHAR(20),
+   	description VARCHAR(50),
+    	rating FLOAT
 )
 ;
 -- Insert values to Cinema table
@@ -74,10 +74,10 @@ VALUES
 SELECT * FROM Cinema;
 
 /* 1st Solution */
-SELECT id,
-	   movie,
-       description,
-       rating
+SELECT  id,
+	movie,
+        description,
+        rating
 FROM Cinema AS c
 WHERE MOD(id, 2)!= 0 AND description != 'boring'
 -- In Leetcode the result table should be ordered by rating in descending order
@@ -88,20 +88,20 @@ ORDER BY rating DESC
 Output
 # 	id	movie			description		rating
 	5	House card		Interesting		9.1
-	1	War				great 3D		8.9
+	1	War			great 3D		8.9
 */
 
 /* 2nd Alternative */
 SELECT 	t1.id,
-		t1.movie,
+	t1.movie,
         t1.description,
         t1.rating
 FROM (
 	SELECT id,
-	   movie,
-       description,
-       rating,
-       MOD(id, 2) AS odd_even
+	       movie,
+       	       description,
+               rating,
+               MOD(id, 2) AS odd_even
 	FROM Cinema
 	WHERE description <> 'boring'
     ORDER BY rating DESC
@@ -113,5 +113,5 @@ WHERE odd_even =1
 Output
 # 	id	movie			description		rating
 	5	House card		Interesting		9.1
-	1	War				great 3D		8.9
+	1	War			great 3D		8.9
 */
